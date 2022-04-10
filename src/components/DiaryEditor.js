@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+// DiaryEditor.js
+import React, { useState, useRef } from "react";
 
 const DiaryEditor = () => {
+  // useRef
+  const authorInput = useRef();
+  const contentInput = useRef();
   // common state
   const [state, setState] = useState({
     author: "",
@@ -18,8 +22,18 @@ const DiaryEditor = () => {
   };
   // handleSubmit
   const handleSubmit = () => {
-    console.log(state);
-    alert("Successful Diary Save!");
+    // not write author? author < 1
+    if (state.author.length < 1) {
+      authorInput.current.focus();
+      return;
+    }
+    // not write content? content < 5
+    if (state.content.length < 5) {
+      alert("일기 작성은 최소 5글자 이상 입력해주세요...");
+      contentInput.current.focus();
+      return;
+    }
+    alert("저장 성공!");
   };
   return (
     <div className="diaryEditor">
@@ -28,8 +42,10 @@ const DiaryEditor = () => {
         <input
           type="text"
           name="author"
+          id="author"
           value={state.author}
           onChange={changeStateHandler}
+          ref={authorInput}
           placeholder="Author..."
           maxLength="50"
         />
@@ -38,6 +54,7 @@ const DiaryEditor = () => {
             name="content"
             value={state.content}
             onChange={changeStateHandler}
+            ref={contentInput}
             placeholder="content..."
             maxLength="1000"
           />
