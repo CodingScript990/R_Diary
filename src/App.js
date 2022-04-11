@@ -1,51 +1,41 @@
 // App.js
+import React, { useState, useRef } from "react";
 import "./App.css";
 import DiaryEditor from "./components/DiaryEditor";
 import DiaryList from "./components/DiaryList";
+import bgVideo from "./asset/bg-video.mp4";
 
 const App = () => {
   // dummyList
-  const dummyList = [
-    {
-      id: 1,
-      author: "lee jin",
-      content: "hi~!",
-      emotion: 5,
-      created_date: new Date().getTime(),
-    },
-    {
-      id: 2,
-      author: "park kim",
-      content: "hola!",
-      emotion: 1,
-      created_date: new Date().getTime(),
-    },
-    {
-      id: 3,
-      author: "jenny",
-      content: "gogo!",
-      emotion: 2,
-      created_date: new Date().getTime(),
-    },
-    {
-      id: 4,
-      author: "ji woo",
-      content: "come on!",
-      emotion: 3,
-      created_date: new Date().getTime(),
-    },
-    {
-      id: 5,
-      author: "sun mi",
-      content: "nal do go ga shi na?",
-      emotion: 4,
-      created_date: new Date().getTime(),
-    },
-  ];
+  // const dummyList = [{}];
+  // common data state[Array]
+  const [data, setData] = useState([]);
+  // reference state => dataId(index number => start zero![0] => 1...)
+  const dataId = useRef(0);
+  // create diary event handler
+  const onCreate = (author, content, emotion) => {
+    // props => author, content, emotion
+    // create date
+    const crt_date = new Date().getTime();
+    // new item Obj
+    const newItem = {
+      author,
+      content,
+      emotion,
+      crt_date,
+      id: dataId.current,
+    };
+    // not same index number! add plus number one!
+    dataId.current += 1;
+    // save data => data, newItem
+    setData([newItem, ...data]);
+  };
   return (
     <div className="App">
-      <DiaryEditor />
-      <DiaryList dummyList={dummyList} />
+      <div className="container">
+        <DiaryEditor onCreate={onCreate} />
+        <DiaryList diaryList={data} />
+      </div>
     </div>
   );
 };

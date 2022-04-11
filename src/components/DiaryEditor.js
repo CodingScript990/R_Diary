@@ -1,21 +1,24 @@
 // DiaryEditor.js
 import React, { useState, useRef } from "react";
+// icons
+import { AiTwotoneSnippets } from "react-icons/ai";
 
-const DiaryEditor = () => {
-  // useRef
-  const authorInput = useRef();
-  const contentInput = useRef();
+const DiaryEditor = ({ onCreate }) => {
+  // props state => onCreate
   // common state
   const [state, setState] = useState({
     author: "",
     content: "",
-    // ...state => 스프레이드 연산자!
     emotion: 1,
   });
+  // useRef
+  const authorInput = useRef();
+  const contentInput = useRef();
   // event handler => value
   const changeStateHandler = (e) => {
     // state
     setState({
+      // ...state => 스프레이드 연산자!
       ...state,
       [e.target.name]: e.target.value,
     });
@@ -29,24 +32,37 @@ const DiaryEditor = () => {
     }
     // not write content? content < 5
     if (state.content.length < 5) {
-      alert("일기 작성은 최소 5글자 이상 입력해주세요...");
       contentInput.current.focus();
       return;
     }
+    // create author, content, emotion data
+    onCreate(state.author, state.content, state.emotion);
+    // successful msg
     alert("저장 성공!");
+    // statae data => successful and next action => refresh data
+    setState({
+      author: "",
+      content: "",
+      emotion: 1,
+    });
   };
   return (
     <div className="diaryEditor">
-      <h2>Today's Diary</h2>
+      <h2>
+        <AiTwotoneSnippets
+          fontSize={24}
+          style={{ color: "#CC70EF", marginRight: "10px" }}
+        />
+        Today's Diary
+      </h2>
       <div>
         <input
           type="text"
           name="author"
-          id="author"
           value={state.author}
           onChange={changeStateHandler}
           ref={authorInput}
-          placeholder="Author..."
+          placeholder="Please author at least one letter..."
           maxLength="50"
         />
         <div>
@@ -55,7 +71,7 @@ const DiaryEditor = () => {
             value={state.content}
             onChange={changeStateHandler}
             ref={contentInput}
-            placeholder="content..."
+            placeholder="Please write at least 5 letters..."
             maxLength="1000"
           />
         </div>
