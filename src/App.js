@@ -3,7 +3,6 @@ import React, { useState, useRef } from "react";
 import "./App.css";
 import DiaryEditor from "./components/DiaryEditor";
 import DiaryList from "./components/DiaryList";
-import bgVideo from "./asset/bg-video.mp4";
 
 const App = () => {
   // dummyList
@@ -30,11 +29,32 @@ const App = () => {
     // save data => data, newItem
     setData([newItem, ...data]);
   };
+  // Diary Item Delete event handler
+  const onRemove = (targertId) => {
+    // Parameters => targetId[매개변수]
+    console.log(`${targertId}가 삭제 되었습니다.`);
+    // filter => item id !== targetId
+    const newDiaryList = data.filter((item) => item.id !== targertId);
+    // Delete 된 data를 제외
+    setData(newDiaryList);
+  };
+  // DiaryItem parameter => Edit event handler(Modify event)
+  const onEdit = (targertId, newContent) => {
+    // setData
+    setData(
+      // data => item id, targetId 가 True이면 newContent에 값을 주고
+      // data => item id, targetId  가 false이면 item data를 그대로 반환해줘라!
+      data.map((item) =>
+        item.id === targertId ? { ...item, content: newContent } : item
+      )
+    );
+  };
+
   return (
     <div className="App">
       <div className="container">
         <DiaryEditor onCreate={onCreate} />
-        <DiaryList diaryList={data} />
+        <DiaryList onEdit={onEdit} onRemove={onRemove} diaryList={data} />
       </div>
     </div>
   );

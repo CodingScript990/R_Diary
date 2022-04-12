@@ -74,6 +74,7 @@
   border: 1px solid #38173f93;
   border-radius: 5px;
   color: #a356b2ca;
+  outline: none;
   font-weight: 700;
 }
 
@@ -181,16 +182,91 @@
 
 /* End of DiaryItem info */
 
+/* DiaryItem Info Sub */
+
+.diaryItem .info-sub {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 /* DiaryItem Date */
 
-.diaryItem .date {
+.diaryItem .info-sub .date {
   color: #5b5858;
-  text-align: center;
-  display: flex;
-  justify-content: flex-end;
   font-weight: 700;
 }
 
 /* End of DiaryItem Date */
+
+/* DiaryItem Delete Button */
+
+.info-sub .sub-icons .delete-icon {
+  font-size: 22px;
+  color: #ff0000;
+  cursor: pointer;
+  margin-right: 15px;
+  transition: color 1s;
+}
+
+.info-sub .sub-icons .delete-icon:hover {
+  color: #ac4747;
+  transition: color 1s;
+}
+
+/* End of DiaryItem Delete Button */
+
+/* DiaryItem Modify Button */
+
+.info-sub .sub-icons .modify-icon {
+  font-size: 22px;
+  color: #716da3;
+  cursor: pointer;
+  transition: color 1s;
+}
+
+.info-sub .sub-icons .modify-icon:hover {
+  color: #4a457d;
+  transition: color 1s;
+}
+
+/* End of DiaryItem Modify Button */
+
+/* DiaryItem Cancel Button */
+
+.info-sub .sub-icons .cancel-icon {
+  font-size: 22px;
+  color: #eb1919;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: color 1s;
+}
+
+.info-sub .sub-icons .cancel-icon:hover {
+  color: #ac184c;
+  transition: color 1s;
+}
+
+/* End of DiaryItem Cancel Button */
+
+/* DiaryItem Modify Save Button */
+
+.info-sub .sub-icons .save-icon {
+  font-size: 24px;
+  color: #6a63cf;
+  cursor: pointer;
+  transition: color 1s;
+}
+
+.info-sub .sub-icons .save-icon:hover {
+  color: #373367;
+  transition: color 1s;
+}
+
+
+/* End of DiaryItem Modify Save Button */
+
+/* End of DiaryItem Info Sub */
 
 /* End of DiaryItem */
