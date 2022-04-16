@@ -1,9 +1,8 @@
 // App.js
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import "./App.css";
 import DiaryEditor from "./components/DiaryEditor";
 import DiaryList from "./components/DiaryList";
-import Lifecycle from "./components/Lifecycle";
 
 const App = () => {
   // dummyList
@@ -12,6 +11,31 @@ const App = () => {
   const [data, setData] = useState([]);
   // reference state => dataId(index number => start zero![0] => 1...)
   const dataId = useRef(0);
+  // API response
+  const getData = async () => {
+    // response url[api]
+    const res = await fetch(
+      "https://jsonplaceholder.typicode.com/comments"
+    ).then((res) => res.json());
+    // slice => 0 ~ 20 show the data
+    const initData = res.slice(0, 20).map((item) => {
+      // return => author[email]
+      return {
+        author: item.email,
+        content: item.body,
+        emotion: Math.floor(Math.random() * 5) + 1,
+        crt_date: new Date().getTime(),
+        id: dataId.current++,
+      };
+    });
+    // setData => initData
+    setData(initData);
+  };
+  // mount => callback getData[api => response]
+  useEffect(() => {
+    // callback!
+    getData();
+  }, []);
   // create diary event handler
   const onCreate = (author, content, emotion) => {
     // props => author, content, emotion
@@ -51,11 +75,30 @@ const App = () => {
     );
   };
 
+  // getDiaryAnalysis => useMemo(emotion up, down list) => computational optimization[useMemo => goodCount, badCount, goodRaito]
+  const getDiaryAnalysis = useMemo(() => {
+    // emotion => Show the 3 ↑ is length
+    const goodCount = data.filter((item) => item.emotion >= 3).length;
+    // emotion => bad count
+    const badCount = data.length - goodCount;
+    // emotion => good ratio
+    const goodRatio = (goodCount / data.length) * 100;
+    // return => goodCount, badCount, goodRatio
+    return { goodCount, badCount, goodRatio };
+  }, [data.length]);
+
+  // obj calling getDiaryAnalysis value
+  const { goodCount, badCount, goodRatio } = getDiaryAnalysis;
+
   return (
     <div className="App">
       <div className="container">
-        <Lifecycle />
+        {/* <Lifecycle /> */}
         <DiaryEditor onCreate={onCreate} />
+        <div>전체 일기 : {data.length}</div>
+        <div>기분 좋은 일기 개수 : {goodCount}</div>
+        <div>기분 나쁜 일기 개수 : {badCount}</div>
+        <div>기분 좋은 일기 비율 : {goodRatio}</div>
         <DiaryList onEdit={onEdit} onRemove={onRemove} diaryList={data} />
       </div>
     </div>
