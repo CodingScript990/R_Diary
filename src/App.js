@@ -1,10 +1,20 @@
 // App.js
 import React, { useState, useRef, useEffect, useMemo } from "react";
+// App.css
 import "./App.css";
+// export url
 import DiaryEditor from "./components/DiaryEditor";
 import DiaryList from "./components/DiaryList";
+// icons
+import {
+  BsFillEmojiHeartEyesFill,
+  BsFillEmojiFrownFill,
+  BsFillEmojiSunglassesFill,
+} from "react-icons/bs";
 
 const App = () => {
+  // weather api
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=35.800&lon=128.550&appid=27d5206b6b8a3e5de6084cc0618b62bb`;
   // dummyList
   // const dummyList = [{}];
   // common data state[Array]
@@ -93,12 +103,40 @@ const App = () => {
   return (
     <div className="App">
       <div className="container">
-        {/* <Lifecycle /> */}
+        <div className="weather">
+          <div>location</div>
+          <div>temp</div>
+          <div>Clouds</div>
+        </div>
         <DiaryEditor onCreate={onCreate} />
-        <div>전체 일기 : {data.length}</div>
-        <div>기분 좋은 일기 개수 : {goodCount}</div>
-        <div>기분 나쁜 일기 개수 : {badCount}</div>
-        <div>기분 좋은 일기 비율 : {goodRatio}</div>
+        <div className="diary__info">
+          <div className="info__title">
+            <h3>전체 일기 : {data.length}</h3>
+          </div>
+          <div className="info__emotions">
+            <p className="emotion__icons">
+              <BsFillEmojiHeartEyesFill
+                fontSize={24}
+                style={{ marginRight: "5px" }}
+              />{" "}
+              : {goodCount}
+            </p>
+            <p className="emotion__icons">
+              <BsFillEmojiFrownFill
+                fontSize={24}
+                style={{ marginRight: "5px" }}
+              />{" "}
+              : {badCount}
+            </p>
+            <p className="emotion__icons">
+              <BsFillEmojiSunglassesFill
+                fontSize={24}
+                style={{ marginRight: "5px" }}
+              />{" "}
+              : {goodRatio}
+            </p>
+          </div>
+        </div>
         <DiaryList onEdit={onEdit} onRemove={onRemove} diaryList={data} />
       </div>
     </div>

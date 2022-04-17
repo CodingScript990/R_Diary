@@ -16,7 +16,73 @@
   border-radius: 8px;
   background-color: #ffffffd8;
   box-shadow: 0 0 12px 5px #dc9bf69c;
+  position: relative;
 }
+
+/* Weather */
+
+.weather {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: absolute;
+  top: .5%;
+  left: 87%;
+}
+
+/* End of Weather */
+
+/* Diary Info */
+
+.diary__info {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  margin: 25px auto -15px;
+}
+
+/* Info Title */
+
+.diary__info .info__title {
+  color: #4e4984;
+  text-shadow: 0 0 5px rgb(192, 178, 241);
+}
+
+/* End of Info Title */
+
+/* Info Emotions */
+
+.info__emotions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.info__emotions .emotion__icons {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.info__emotions .emotion__icons:nth-child(1) {
+  color: #d04659;
+}
+
+.info__emotions .emotion__icons:nth-child(2) {
+  color: #443ac4;
+}
+
+.info__emotions .emotion__icons:nth-child(3) {
+  color: #453e8f;
+}
+
+/* End of Info Emotions */
+
+/* End of Diary Info */
+
+
 /* Diary */
 
 .diaryEditor {
