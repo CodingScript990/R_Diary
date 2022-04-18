@@ -1,13 +1,17 @@
 // DiaryList.js
-import React from "react";
+import React, { useContext } from "react";
 // import
 import DiaryItem from "./DiaryItem";
 // icons
 import { AiOutlineCarryOut } from "react-icons/ai";
+// url
+import { DiaryStataeContext } from "../App";
 
-const DiaryList = ({ diaryList, onRemove, onEdit }) => {
+const DiaryList = ({ onRemove, onEdit }) => {
   // dummyList => props!
   // onRemove => prop drilling : 최상의 props를 하위 component에 데이터를 전달하는 방식을 말한다. React Component Tree의 한 부분이다.
+  // useContext hook 으로 state => list를 관리해준다.
+  const diaryList = useContext(DiaryStataeContext);
   return (
     <div className="diaryList">
       <h2>
