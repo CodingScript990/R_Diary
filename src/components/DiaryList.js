@@ -7,8 +7,7 @@ import { AiOutlineCarryOut } from "react-icons/ai";
 // url
 import { DiaryStataeContext } from "../App";
 
-const DiaryList = ({ onRemove, onEdit }) => {
-  // dummyList => props!
+const DiaryList = () => {
   // onRemove => prop drilling : 최상의 props를 하위 component에 데이터를 전달하는 방식을 말한다. React Component Tree의 한 부분이다.
   // useContext hook 으로 state => list를 관리해준다.
   const diaryList = useContext(DiaryStataeContext);
@@ -25,12 +24,7 @@ const DiaryList = ({ onRemove, onEdit }) => {
       <div>
         {/* item list => diaryitem[id, ...state] */}
         {diaryList.map((item) => (
-          <DiaryItem
-            key={item.id}
-            {...item}
-            onEdit={onEdit}
-            onRemove={onRemove}
-          />
+          <DiaryItem key={item.id} {...item} />
         ))}
       </div>
     </div>

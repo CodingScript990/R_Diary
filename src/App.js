@@ -166,7 +166,7 @@ const App = () => {
 
   // useMemo로 onCreate, onRemove, onEdit을 관리하기[rerendering이 되지 않게 하기 위함이다.]
   const memoizedDispatches = useMemo(() => {
-    return { onCreate: onCreate, onRemove };
+    return { onEdit, onCreate, onRemove };
   }, []);
 
   // getDiaryAnalysis => useMemo(emotion up, down list) => computational optimization[useMemo => goodCount, badCount, goodRaito]

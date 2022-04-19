@@ -1,10 +1,13 @@
 // DiaryEditor.js
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 // icons
 import { AiTwotoneSnippets } from "react-icons/ai";
+// url
+import { DiaryDispatchContext } from "../App";
 
-const DiaryEditor = ({ onCreate }) => {
-  // props state => onCreate
+const DiaryEditor = () => {
+  // useContext => 상태관리[비구조 할당]
+  const { onCreate } = useContext(DiaryDispatchContext);
   // common state
   const [state, setState] = useState({
     author: "",

@@ -1,20 +1,16 @@
 // DiaryItem.js
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 // icons
 import { AiFillDelete } from "react-icons/ai";
 import { BsHammer, BsXLg } from "react-icons/bs";
 import { BiMessageSquareEdit } from "react-icons/bi";
+// url
+import { DiaryDispatchContext } from "../App";
 
-const DiaryItem = ({
-  onEdit,
-  onRemove,
-  author,
-  content,
-  emotion,
-  crt_date,
-  id,
-}) => {
-  // props => author, content, emotion, created_date, id, onRemove
+const DiaryItem = ({ author, content, emotion, crt_date, id }) => {
+  // props => author, content, emotion, created_date, id
+  // useContext => 상태관리[비구조 할당]
+  const { onRemove, onEdit } = useContext(DiaryDispatchContext);
   // modify state => boolean type
   const [isEdit, setIsEdit] = useState(false);
   // modify toggle handler
